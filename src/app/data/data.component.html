@@ -1,0 +1,23 @@
+<div class="container-fluid row">
+  <div class="col">
+    <p class="info" id="title">Total de palabras</p>
+    <p class="info" id="stat">{{totalWords}}</p>
+    <div class="line-container">
+      <hr>
+      <span class="dot" [ngStyle]="{'left.%': w }"></span>
+    </div>
+  </div>
+  <div class="col" id="vl"></div>
+  <div class="col">
+    <p class="info" id="title">Tiempo total</p>
+    <p class="info" id="stat">{{totalTime}}s</p>
+    <div id="stopper"></div>
+    <div id="timer"></div>
+    <div class="clock" [ngStyle]="{'background-image': getBackgroundStyle()}"></div>
+  </div>
+  <div class="col" id="vl"></div>
+  <div class="col">
+    <p class="info" id="title">Índice de claridad:</p>
+    <p class="info" id="stat">{{c}}</p>
+  </div>
+</div>

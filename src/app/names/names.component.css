@@ -1,0 +1,25 @@
+.Nombres .row {
+    flex-wrap: nowrap;
+    margin: auto;
+    width: 50%;
+    text-align: center ;
+}
+.Nombres .col {
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    color: #5B776B;
+    opacity: 0.75;
+}
+.Group {
+    color : #4A5B54;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+}
+#G {
+    margin-bottom: 5px;
+}
