@@ -1,9 +1,10 @@
 {
-    "groupNumber": 1,
+    "groupNumber": "2",
     "names": [
-        "Sergio David Ferreira",
-        "David Santiago Rojas"
+        "Juan Jos\u00e9 Rojas "
     ],
-    "wordCount": 71,
-    "totalTime": 58
+    "groupName": "Duotek",
+    "wordCount": 51,
+    "uniquePrcnt": 82,
+    "totalTime": 84
 }

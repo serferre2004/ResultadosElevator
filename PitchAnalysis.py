@@ -1,5 +1,6 @@
 
 from datetime import datetime
+import csv
 import os
 import json
 
@@ -12,10 +13,17 @@ f = open(file_name, 'r', encoding = 'utf8')
 t = open(timestamp_file, 'r', encoding= 'utf8')
 d = open(data_file, 'w', encoding = 'utf8')
 
-initial_time = datetime.strptime(t.readline(), '%H:%M:%S')
+    
+stamp = t.readline().split('|')
+initial_time = datetime.strptime(stamp[0], '%H:%M:%S')
 current_time = datetime.strptime("01:00:00", '%H:%M:%S')
+with open('turnos.csv', encoding='utf8') as fd:
+    reader=csv.reader(fd)
+    interestingrows=[row for idx, row in enumerate(reader) if idx == int(stamp[1])+1]
+info_group = interestingrows[0][0]
+info_group = info_group.strip().split(';')
 
-while current_time < initial_time:
+while current_time <= initial_time:
     line = f.readline().strip()
     if 'Time:' in line:
         current_time = line[6:]
@@ -32,27 +40,27 @@ while line != "":
         current_time = line[6:]
 
 total_time = datetime.strptime(current_time, '%H:%M:%S') - initial_time
-total_words = text.count(' ')
-with open(timestamp_file, 'w') as T:
-    T.write(current_time)
+palabras = text.split()  # Divide el texto por espacios
+palabras_normalizadas = [palabra.lower() for palabra in palabras]
+palabras_unicas = set(palabras_normalizadas)
+total_words = len(palabras)
+unique_words = len(palabras_unicas)
+prcnt = round(unique_words/total_words*100)
+with open(timestamp_file, 'w', encoding='utf8') as T:
+    T.write(current_time+"|"+str(int(stamp[1])+1))
 
 data = {
-    "groupNumber":1,
-    "names": ["Sergio David Ferreira", "David Santiago Rojas"],
+    "groupNumber":info_group[0],
+    "names": [info_group[2]],
+    "groupName":info_group[1],
     "wordCount":total_words,
+    "uniquePrcnt": prcnt,
     "totalTime":round(total_time.total_seconds())
 }
 
 json_object = json.dumps(data, indent=4)
 d.write(json_object)
 
-#from transformers import pipeline
-
-# Cargar pipeline para resumen
-#summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
-
-#resumen = summarizer(text, max_length=total_words//2, min_length=20, do_sample=False)
-#print(resumen[0]['summary_text'])
 f.close()
 t.close()
 d.close()

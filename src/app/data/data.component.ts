@@ -13,6 +13,7 @@ import { interval } from 'rxjs';
 export class DataComponent implements OnInit {
   totalWords: number = 0;
   totalTime: number = 0;
+  uniqueWords: number = 0;
   w: number = 0;
   W: number = 0;
   d: number = 0;
@@ -36,10 +37,11 @@ export class DataComponent implements OnInit {
       if (response.totalTime != this.totalTime){
         this.d = 0;
         this.w = 0;
+        this.c = 0;
       }
       this.totalTime = response.totalTime;
       this.totalWords = response.wordCount;
-      this.C = response.wordCount;
+      this.C = response.uniquePrcnt;
       this.D = this.totalTime/60*360;
       this.W = this.totalWords/160*100;
       if (this.w > 95) {this.w = 95;}

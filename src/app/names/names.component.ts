@@ -8,6 +8,7 @@ import { DataService } from '../services/data.service';
 })
 export class NamesComponent implements OnInit {
   names: Array<string> = [];
+  groupName: string = "";
   groupNumber: number = 0;
 
   constructor(private dataService: DataService) { }
@@ -20,6 +21,7 @@ export class NamesComponent implements OnInit {
     this.dataService.getData().subscribe((response => {
       this.groupNumber = response.groupNumber;
       this.names = response.names;
+      this.groupName = response.groupName;
     }))
   }
 
